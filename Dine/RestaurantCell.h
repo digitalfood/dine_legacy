@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Business.h"
+#import "Restaurant.h"
 
-@interface BusinessCell : UITableViewCell
+@interface RestaurantCell : UITableViewCell
 
-@property (nonatomic, strong) Business *business;
+@property (nonatomic, strong) Restaurant *restautant;
 
 @end

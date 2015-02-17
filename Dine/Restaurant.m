@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 codepath. All rights reserved.
 //
 
-#import "Business.h"
+#import "Restaurant.h"
 #import <AddressBook/AddressBook.h>
 
-@implementation Business
+@implementation Restaurant
 
 float const MILES_PER_METER = 0.000621371;
 
@@ -63,7 +63,7 @@ float const MILES_PER_METER = 0.000621371;
     NSMutableArray *businesses = [NSMutableArray array];
     
     for (NSDictionary *dictionary in dictionaries) {
-        Business *business = [[Business alloc] initWithDictionary:dictionary];
+        Restaurant *business = [[Restaurant alloc] initWithDictionary:dictionary];
         [businesses addObject:business];
     }
     

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface Business : NSObject <MKAnnotation>
+@interface Restaurant : NSObject <MKAnnotation>
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *name;

@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 codepath. All rights reserved.
 //
 
-#import "BusinessCell.h"
+#import "RestaurantCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface BusinessCell ()
+@interface RestaurantCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *thumbImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation BusinessCell
+@implementation RestaurantCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -35,8 +35,8 @@
     // Configure the view for the selected state
 }
 
-- (void)setBusiness:(Business *)business {
-    _business = business;
+- (void)setRestautant:(Restaurant *)business {
+    _restautant = business;
     
     [self.thumbImageView setImageWithURL:[NSURL URLWithString:business.imageUrl]];
     
@@ -46,7 +46,7 @@
         } completion:nil];
     } failure:nil];
     
-    self.nameLabel.text = self.business.name;
+    self.nameLabel.text = self.restautant.name;
     
     request = [NSURLRequest requestWithURL:[NSURL URLWithString:business.ratingImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:5.0f];
     [self.ratingImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -54,10 +54,10 @@
         } completion:nil];
     } failure:nil];
     
-    self.ratingLabel.text = [NSString stringWithFormat:@"%ld Reviews", self.business.numReviews];
-    self.addressLabel.text = self.business.address;
-    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.business.distance];
-    self.categoryLabel.text = self.business.categories;
+    self.ratingLabel.text = [NSString stringWithFormat:@"%ld Reviews", self.restautant.numReviews];
+//    self.addressLabel.text = self.restautant.address;
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.restautant.distance];
+    self.categoryLabel.text = self.restautant.categories;
 }
 
 - (void)layoutSubviews {

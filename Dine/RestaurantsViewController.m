@@ -9,7 +9,7 @@
 #import "RestaurantsViewController.h"
 #import "SVProgressHUD.h"
 #import "YelpClient.h"
-#import "BusinessCell.h"
+#import "RestaurantCell.h"
 
 NSString * const K_YELP_CCONSUMER_KEY = @"vxKwwcR_NMQ7WaEiQBK_CA";
 NSString * const K_YELP_CONSUMER_SECRET = @"33QCvh5bIF5jIHR5klQr7RtBDhQ";
@@ -69,7 +69,7 @@ float const METERS_PER_MILE = 1609.344;
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"BusinessCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RestaurantCell" bundle:nil] forCellReuseIdentifier:@"RestaurantCell"];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -89,8 +89,8 @@ float const METERS_PER_MILE = 1609.344;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BusinessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BusinessCell"];
-    cell.business = self.businesses[indexPath.row];
+    RestaurantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantCell"];
+    cell.restautant = self.businesses[indexPath.row];
     return cell;
 }
 
@@ -129,7 +129,7 @@ float const METERS_PER_MILE = 1609.344;
     }
     [self.client searchWithTerm:@"Restaurants" params:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSArray *businessesDictionary = response[@"businesses"];
-        NSArray *businesses = [Business businessesWithDictionaries:businessesDictionary];
+        NSArray *businesses = [Restaurant businessesWithDictionaries:businessesDictionary];
         self.businesses = [NSMutableArray arrayWithArray:businesses];
         [self.tableView reloadData];
         [SVProgressHUD dismiss];
