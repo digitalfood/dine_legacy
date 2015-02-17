@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TipViewController.h"
+#import "RestaurantsViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,15 +17,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    // set navigation bar appearance
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:121.0/255.0 green:174.0/255.0 blue:1.0 alpha:1.0]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    TipViewController *vc = [[TipViewController alloc] init];
-    
-    self.window.rootViewController = vc;
+    RestaurantsViewController *vc = [[RestaurantsViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nvc;
     
     [self.window makeKeyAndVisible];
-    
     return YES;
 }
 
