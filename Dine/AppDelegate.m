@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 Yahoo!, inc. All rights reserved.
 //
 
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "AppDelegate.h"
 #import "Parse/Parse.h"
 #import <ParseUI/ParseUI.h>
-#import "AppDelegate.h"
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "MainViewController.h"
+
+NSString *kApplicationId = @"fBRzEFzV9FSrQlnUpokfbdEl4a8T6zpCMtCl5UFw";
+NSString *kClientKey = @"jgjb5IDkcNrDJQTeQ97KyQZ3s49frMry5unqwUuu";
 
 @interface AppDelegate () <PFLogInViewControllerDelegate>
 
@@ -20,31 +23,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // hide status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
     // Initiate Parse
-    [Parse setApplicationId:@"fBRzEFzV9FSrQlnUpokfbdEl4a8T6zpCMtCl5UFw" clientKey:@"jgjb5IDkcNrDJQTeQ97KyQZ3s49frMry5unqwUuu"];
+    [Parse setApplicationId:kApplicationId clientKey:kClientKey];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
     [PFFacebookUtils initializeFacebook];
     
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        // hide status bar
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        // set navigation bar appearance
-        [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:121.0/255.0 green:174.0/255.0 blue:1.0 alpha:1.0]];
-        
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        MainViewController *vc = [[MainViewController alloc] init];
-        self.window.rootViewController = vc;
-        
+        [self signedIn];
     } else {
-        PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
-        logInController.delegate = self;
-        logInController.fields = (PFLogInFieldsFacebook);
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.rootViewController = logInController;
-        [[UINavigationBar appearance] setHidden:YES];
+        [self notSignedIn];
     }
     
     [self.window makeKeyAndVisible];
@@ -78,22 +69,57 @@
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
 }
 
-- (void)logInViewController:(PFLogInViewController *)controller
-               didLogInUser:(PFUser *)user {
-    // hide status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    // set navigation bar appearance
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:121.0/255.0 green:174.0/255.0 blue:1.0 alpha:1.0]];
+- (void)notSignedIn {
+    PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
+    logInController.delegate = self;
+    logInController.fields = (PFLogInFieldsFacebook);
     
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"tea" ofType:@"gif"];
+    NSURL *imageURL	 = [NSURL fileURLWithPath: filePath];
+    
+    // strech the image a bit to make it fit.
+    NSString *htmlString = @"<html><body style='margin:0; padding:0;'><img src='%@' width='%fpx' height='%fpx'></body></html>";
+    NSString *imageHTML  = [[NSString alloc] initWithFormat:htmlString, imageURL, width, height];
+    
+    UIWebView *webViewBG = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    webViewBG.userInteractionEnabled = NO;
+    webViewBG.backgroundColor = [UIColor lightGrayColor];
+    [webViewBG loadHTMLString:imageHTML baseURL:nil];
+    [logInController.view addSubview:webViewBG];
+
+    UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    overlay.backgroundColor = [UIColor clearColor];
+    
+    UIFont *font= [UIFont systemFontOfSize:32];
+    NSDictionary *attributes = @{NSFontAttributeName: font};
+    NSString *title = @"Dine.";
+    CGRect textLabelRect = [title boundingRectWithSize:CGSizeMake(logInController.view.frame.size.width - 30, CGFLOAT_MAX)
+                                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                                     attributes:attributes
+                                                        context:nil];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 150, textLabelRect.size.width, textLabelRect.size.height)];
+    textLabel.font = font;
+    textLabel.text = @"Dine.";
+    textLabel.textColor = [UIColor whiteColor];
+    [overlay addSubview:textLabel];
+    [logInController.view addSubview:overlay];
+    
+    // bring facebook login button to front
+    [logInController.logInView addSubview:logInController.logInView.facebookButton];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = logInController;
+    
+    [[UINavigationBar appearance] setHidden:YES];
+}
+
+- (void)signedIn {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *vc = [[MainViewController alloc] init];
     self.window.rootViewController = vc;
-    [self.window makeKeyAndVisible];
-}
-
-- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
 }
 
 @end
