@@ -36,14 +36,13 @@
 - (void)setRestaurant:(Restaurant *)restaurant {
     _restaurant = restaurant;
 
+    // set-up image
     self.restaurantImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.restaurantImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.restaurantImageView setClipsToBounds:YES];
     [self addSubview:self.restaurantImageView];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.restaurant.imageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:5.0f];
-    
-    NSLog(@"image url:%@", self.restaurant.imageUrl);
     
     __weak RestaurantView *rv = self;
     [self.restaurantImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -52,6 +51,13 @@
         } completion:nil];
     } failure:nil];
 
+    // add overlay to darken the image
+    UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    overlay.backgroundColor = [UIColor blackColor];
+    overlay.alpha = .3;
+    [self addSubview:overlay];
+    
+    // add restaurant name
     UIFont *font = [UIFont systemFontOfSize:25];
     NSDictionary *attributes = @{NSFontAttributeName: font};
     CGRect nameLabelRect = [self.restaurant.name boundingRectWithSize:CGSizeMake(self.frame.size.width - 40, CGFLOAT_MAX)

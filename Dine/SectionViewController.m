@@ -156,7 +156,6 @@ float const METERS_PER_MILE = 1609.344;
         CGFloat xOrigin = i * self.sectionWidth;
         RestaurantView *restaurantView = [[RestaurantView alloc] init];
         restaurantView.frame = CGRectMake(xOrigin, 0, self.sectionWidth, self.sectionHeight);
-        restaurantView.backgroundColor = [UIColor colorWithRed:0.5/i green:0.5 blue:0.5 alpha:1];
         restaurantView.restaurant = self.restaurants[i];
         [self.scrollView addSubview:restaurantView];
     }
