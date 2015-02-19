@@ -6,9 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="menuTableView" destination="UIc-tq-vuy" id="joV-T2-ZBK"/>
+                <outlet property="listView" destination="7fn-eI-FpI" id="vjy-js-ryE"/>
                 <outlet property="sectionView" destination="bXK-oP-VqT" id="I76-Ao-y9N"/>
-                <outlet property="sideMenuYOffset" destination="5fc-4L-mu1" id="GjD-Hd-4JZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,6 +16,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXK-oP-VqT">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                    <color key="backgroundColor" red="0.71577491130000004" green="0.77616679909999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fn-eI-FpI">
                     <rect key="frame" x="0.0" y="368" width="320" height="200"/>
                     <subviews>
@@ -34,26 +37,12 @@
                         <constraint firstAttribute="centerX" secondItem="0OB-Wf-wi8" secondAttribute="centerX" id="nvg-cO-JLo"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UIc-tq-vuy">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="200" id="VZb-C9-VxU"/>
-                    </constraints>
-                </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXK-oP-VqT">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
-                    <color key="backgroundColor" red="0.71577491130000004" green="0.77616679909999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="UIc-tq-vuy" secondAttribute="trailing" id="3aI-Il-f9X"/>
                 <constraint firstItem="7fn-eI-FpI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5HU-hZ-5I2"/>
-                <constraint firstItem="UIc-tq-vuy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5fc-4L-mu1"/>
                 <constraint firstItem="bXK-oP-VqT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OEZ-So-qp3"/>
                 <constraint firstItem="7fn-eI-FpI" firstAttribute="top" secondItem="bXK-oP-VqT" secondAttribute="bottom" id="VHc-ib-MBd"/>
-                <constraint firstItem="UIc-tq-vuy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eU8-dz-gzl"/>
                 <constraint firstItem="bXK-oP-VqT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hjW-eG-Fl5"/>
                 <constraint firstAttribute="trailing" secondItem="7fn-eI-FpI" secondAttribute="trailing" id="sLT-wM-Env"/>
                 <constraint firstAttribute="trailing" secondItem="bXK-oP-VqT" secondAttribute="trailing" id="tW8-eC-zcf"/>

@@ -1,15 +1,17 @@
 //
-//  MainViewController.m
+//  SectionViewController.m
 //  Dine
 //
-//  Created by Pythis Ting on 2/16/15.
+//  Created by Pythis Ting on 2/18/15.
 //  Copyright (c) 2015 Yahoo!, inc. All rights reserved.
 //
 
-#import "RestaurantsViewController.h"
+#import "SectionViewController.h"
+#import <MapKit/MapKit.h>
 #import "SVProgressHUD.h"
 #import "YelpClient.h"
-#import "RestaurantCell.h"
+#import "Restaurant.h"
+#import "RestaurantView.h"
 
 NSString * const K_YELP_CCONSUMER_KEY = @"vxKwwcR_NMQ7WaEiQBK_CA";
 NSString * const K_YELP_CONSUMER_SECRET = @"33QCvh5bIF5jIHR5klQr7RtBDhQ";
@@ -17,18 +19,21 @@ NSString * const K_YELP_TOKEN = @"uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV";
 NSString * const K_YELP_TOKEN_SECRET = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 float const METERS_PER_MILE = 1609.344;
 
-@interface RestaurantsViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface SectionViewController () <UIScrollViewDelegate, CLLocationManagerDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) CGFloat sectionWidth;
+@property (nonatomic, assign) CGFloat sectionHeight;
 
 @property (nonatomic, strong) CLLocation* location;
 @property (nonatomic, strong) YelpClient *client;
-@property (nonatomic, strong) NSMutableArray *businesses;
+@property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
-@implementation RestaurantsViewController
+@implementation SectionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,14 +72,20 @@ float const METERS_PER_MILE = 1609.344;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"RestaurantCell" bundle:nil] forCellReuseIdentifier:@"RestaurantCell"];
-    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.sectionWidth = self.view.frame.size.width;
+    self.sectionHeight = self.view.frame.size.height;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.pagingEnabled = YES;
+    
+    [self.scrollView setShowsHorizontalScrollIndicator:NO];
+    [self.scrollView setShowsVerticalScrollIndicator:NO];
+
+    self.scrollView.delegate = self;
+    
+    self.pageControl.hidden = YES;
+    
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,21 +93,11 @@ float const METERS_PER_MILE = 1609.344;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view methods
+#pragma mark - Scroll View Delegate methods
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.businesses.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RestaurantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RestaurantCell"];
-    cell.restautant = self.businesses[indexPath.row];
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    int page = floor((self.scrollView.contentOffset.x - self.sectionWidth / 2 ) / self.sectionWidth) + 1; //this provide you the page number
+    self.pageControl.currentPage = page;// this displays the white dot as current page
 }
 
 #pragma mark - Core Location Manager Delegate methods
@@ -124,19 +125,43 @@ float const METERS_PER_MILE = 1609.344;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (self.location != nil) {
         NSString *currentLocation = [NSString stringWithFormat:@"%+.6f,%+.6f",self.location.coordinate.latitude, self.location.coordinate.longitude];
-        NSLog(@"current location: %@", currentLocation);
         [params setObject:currentLocation forKey:@"ll"];
+    
+        [self.client searchWithTerm:@"Restaurants" params:params success:^(AFHTTPRequestOperation *operation, id response) {
+            NSArray *restaurantsDictionary = response[@"businesses"];
+            NSArray *restaurants = [Restaurant businessesWithDictionaries:restaurantsDictionary];
+            self.restaurants = [NSMutableArray arrayWithArray:restaurants];
+            [self updateUI];
+            [SVProgressHUD dismiss];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD dismiss];
+            NSLog(@"error: %@", [error description]);
+        }];
     }
-    [self.client searchWithTerm:@"Restaurants" params:params success:^(AFHTTPRequestOperation *operation, id response) {
-        NSArray *businessesDictionary = response[@"businesses"];
-        NSArray *businesses = [Restaurant businessesWithDictionaries:businessesDictionary];
-        self.businesses = [NSMutableArray arrayWithArray:businesses];
-        [self.tableView reloadData];
-        [SVProgressHUD dismiss];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
-        NSLog(@"error: %@", [error description]);
-    }];
+}
+
+- (void)updateUI {
+    // remove existing restua from
+    for(UIView *subview in [self.scrollView subviews]) {
+        [subview removeFromSuperview];
+    }
+    
+    NSInteger numberOfViews = self.restaurants.count;
+    NSLog(@"restaurant count: %ld", numberOfViews);
+    
+    self.pageControl.numberOfPages = numberOfViews;
+    self.pageControl.currentPage = 0;
+    
+    for (int i = 0; i < numberOfViews; i++) {
+        CGFloat xOrigin = i * self.sectionWidth;
+        RestaurantView *restaurantView = [[RestaurantView alloc] init];
+        restaurantView.frame = CGRectMake(xOrigin, 0, self.sectionWidth, self.sectionHeight);
+        restaurantView.backgroundColor = [UIColor colorWithRed:0.5/i green:0.5 blue:0.5 alpha:1];
+        restaurantView.restaurant = self.restaurants[i];
+        [self.scrollView addSubview:restaurantView];
+    }
+    self.scrollView.contentSize = CGSizeMake(self.sectionWidth * numberOfViews, self.sectionHeight);
+
 }
 
 @end

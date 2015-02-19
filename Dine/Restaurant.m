@@ -25,7 +25,7 @@ float const MILES_PER_METER = 0.000621371;
         self.categories = [categoryNames componentsJoinedByString:@", "];
         
         self.name = dictionary[@"name"];
-        self.imageUrl = dictionary[@"image_url"];
+        self.imageUrl = [dictionary[@"image_url"] stringByReplacingOccurrencesOfString:@"ms.jpg" withString:@"l.jpg"];
         NSArray *address = [dictionary valueForKeyPath:@"location.address"];
         NSArray *neighborhoods = [dictionary valueForKeyPath:@"location.neighborhoods"];
         if (address.count == 0 && neighborhoods.count == 0) {
