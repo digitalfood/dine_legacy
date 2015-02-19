@@ -9,7 +9,7 @@
 #import "RestaurantView.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface RestaurantView()
+@interface RestaurantView() <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *restaurantImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
@@ -28,6 +28,10 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        // handle tap gesture
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+        [self addGestureRecognizer:tapGestureRecognizer];
+        self.userInteractionEnabled = YES;
 
     }
     return self;
@@ -71,6 +75,18 @@
     self.nameLabel.numberOfLines = 2;
 
     [self addSubview:self.nameLabel];
+}
+
+#pragma mark - UIGestureRecognizerDelegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+
+#pragma mark - onTap methods
+- (IBAction)onTap:(UITapGestureRecognizer *)tapGestureRecognizer {
+    [self.delegate tapOnRestaurant:self.restaurant];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "SectionViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <SectionViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *sectionView;
 @property (weak, nonatomic) IBOutlet UIView *listView;
 
@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     self.svc = [[SectionViewController alloc] init];
+    self.svc.delegate = self;
     self.svc.view.frame = self.sectionView.frame;
     [self.sectionView addSubview:self.svc.view];
     
@@ -37,6 +38,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)swipeToRestaurant:(Restaurant *)restaurant {
+    NSLog(@"swiped to : %@", restaurant.name);
+    
+    // Joanna please update food menu view controller accordingly
 }
 
 @end

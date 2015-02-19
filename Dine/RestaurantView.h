@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Restaurant.h"
 
+@protocol RestaurantViewDelegate <NSObject>
+
+- (void)tapOnRestaurant:(Restaurant *)restaurant;
+
+@end
+
 @interface RestaurantView : UIView
 
 @property (nonatomic, strong) Restaurant *restaurant;
+@property (nonatomic, weak) id<RestaurantViewDelegate> delegate;
 
 @end

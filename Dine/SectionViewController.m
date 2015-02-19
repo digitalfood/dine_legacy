@@ -7,10 +7,7 @@
 //
 
 #import "SectionViewController.h"
-#import <MapKit/MapKit.h>
-#import "SVProgressHUD.h"
 #import "YelpClient.h"
-#import "Restaurant.h"
 #import "RestaurantView.h"
 
 NSString * const K_YELP_CCONSUMER_KEY = @"vxKwwcR_NMQ7WaEiQBK_CA";
@@ -19,7 +16,7 @@ NSString * const K_YELP_TOKEN = @"uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV";
 NSString * const K_YELP_TOKEN_SECRET = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 float const METERS_PER_MILE = 1609.344;
 
-@interface SectionViewController () <UIScrollViewDelegate, CLLocationManagerDelegate>
+@interface SectionViewController () <UIScrollViewDelegate, CLLocationManagerDelegate, RestaurantViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
@@ -97,6 +94,10 @@ float const METERS_PER_MILE = 1609.344;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     int page = floor((self.scrollView.contentOffset.x - self.sectionWidth / 2 ) / self.sectionWidth) + 1; //this provide you the page number
+    
+    if (self.pageControl.currentPage != page) {
+        [self.delegate swipeToRestaurant:self.restaurants[page]];
+    }
     self.pageControl.currentPage = page;// this displays the white dot as current page
 }
 
@@ -117,11 +118,16 @@ float const METERS_PER_MILE = 1609.344;
     [self reloadData];
 }
 
+#pragma mark - Restaurant View Delegate methods
+
+- (void)tapOnRestaurant:(Restaurant *)restaurant {
+    // TODO: display restaurant detail page
+    NSLog(@"you've tapped on a restaurant!!");
+}
+
 #pragma mark - private methods
 
 - (void)reloadData {
-    [SVProgressHUD showWithStatus:@"Loading"];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (self.location != nil) {
         NSString *currentLocation = [NSString stringWithFormat:@"%+.6f,%+.6f",self.location.coordinate.latitude, self.location.coordinate.longitude];
@@ -132,9 +138,8 @@ float const METERS_PER_MILE = 1609.344;
             NSArray *restaurants = [Restaurant businessesWithDictionaries:restaurantsDictionary];
             self.restaurants = [NSMutableArray arrayWithArray:restaurants];
             [self updateUI];
-            [SVProgressHUD dismiss];
+
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [SVProgressHUD dismiss];
             NSLog(@"error: %@", [error description]);
         }];
     }
@@ -147,7 +152,6 @@ float const METERS_PER_MILE = 1609.344;
     }
     
     NSInteger numberOfViews = self.restaurants.count;
-    NSLog(@"restaurant count: %ld", numberOfViews);
     
     self.pageControl.numberOfPages = numberOfViews;
     self.pageControl.currentPage = 0;
@@ -155,7 +159,9 @@ float const METERS_PER_MILE = 1609.344;
     for (int i = 0; i < numberOfViews; i++) {
         CGFloat xOrigin = i * self.sectionWidth;
         RestaurantView *restaurantView = [[RestaurantView alloc] init];
+        restaurantView.delegate = self;
         restaurantView.frame = CGRectMake(xOrigin, 0, self.sectionWidth, self.sectionHeight);
+        // restaurantView.backgroundColor = [UIColor colorWithRed:0.5/i green:0.5 blue:0.5 alpha:1];
         restaurantView.restaurant = self.restaurants[i];
         [self.scrollView addSubview:restaurantView];
     }

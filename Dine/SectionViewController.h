@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "Restaurant.h"
+
+@protocol SectionViewControllerDelegate <NSObject>
+
+- (void)swipeToRestaurant:(Restaurant *)restaurant;
+
+@end
 
 @interface SectionViewController : UIViewController
+
+@property (nonatomic, weak) id<SectionViewControllerDelegate> delegate;
 
 @end
