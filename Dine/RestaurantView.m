@@ -41,7 +41,7 @@
     _restaurant = restaurant;
 
     // set-up image
-    self.restaurantImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    self.restaurantImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [[UIScreen mainScreen] bounds].size.height)];
     self.restaurantImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.restaurantImageView setClipsToBounds:YES];
     [self addSubview:self.restaurantImageView];

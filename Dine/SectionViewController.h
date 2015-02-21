@@ -13,6 +13,7 @@
 @protocol SectionViewControllerDelegate <NSObject>
 
 - (void)swipeToRestaurant:(Restaurant *)restaurant;
+- (void)tapOnRestaurant:(Restaurant *)restaurant;
 
 @end
 

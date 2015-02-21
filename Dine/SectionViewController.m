@@ -7,8 +7,8 @@
 //
 
 #import "SectionViewController.h"
-#import "YelpClient.h"
 #import "RestaurantView.h"
+#import "YelpClient.h"
 #import "Parse/Parse.h"
 
 NSString * const K_YELP_CCONSUMER_KEY = @"vxKwwcR_NMQ7WaEiQBK_CA";
@@ -70,8 +70,10 @@ float const METERS_PER_MILE = 1609.344;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.sectionWidth = self.view.frame.size.width;
+    self.sectionWidth = [[UIScreen mainScreen] bounds].size.width;
     self.sectionHeight = self.view.frame.size.height;
+    
+    [self.view setFrame:CGRectMake(0, 0, self.sectionWidth, self.sectionHeight)];
     
     self.scrollView.scrollEnabled = YES;
     self.scrollView.pagingEnabled = YES;
@@ -122,24 +124,7 @@ float const METERS_PER_MILE = 1609.344;
 #pragma mark - Restaurant View Delegate methods
 
 - (void)tapOnRestaurant:(Restaurant *)restaurant {
-    // TODO: display restaurant detail page
-    NSLog(@"you've tapped on a restaurant!!");
-    
-    // Sample code to get restaurant object
-    /*
-    PFQuery *query = [PFQuery queryWithClassName:@"Restaurant"];
-    [query getObjectInBackgroundWithId:@"eS2FBIaZ4s" block:^(PFObject *pfRrestaurant, NSError *error) {
-        NSLog(@"%@", pfRrestaurant);
-    }];
-     */
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Food"];
-    [query whereKey:@"parent" equalTo:[PFObject objectWithoutDataWithClassName:@"Restaurant" objectId:@"eS2FBIaZ4s"]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        for (PFObject *food in objects) {
-            NSLog(@"%@", food);
-        }
-    }];
+    [self.delegate tapOnRestaurant:restaurant];
 }
 
 #pragma mark - private methods
