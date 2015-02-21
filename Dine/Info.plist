@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yahoo.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>com.chanyash.dishes</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,14 +23,14 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb420264611461911</string>
+				<string>fb373452022837710</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>420264611461911</string>
+	<string>373452022837710</string>
 	<key>FacebookDisplayName</key>
 	<string>Dine</string>
 	<key>LSRequiresIPhoneOS</key>
