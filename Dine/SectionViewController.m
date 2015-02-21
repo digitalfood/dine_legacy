@@ -134,7 +134,7 @@ float const METERS_PER_MILE = 1609.344;
      */
     
     PFQuery *query = [PFQuery queryWithClassName:@"Food"];
-    [query whereKey:@"parent" equalTo:[PFObject objectWithoutDataWithClassName:@"Restaurant" objectId:@"eS2FBIaZ4s"]];
+    [query whereKey:@"restaurantId" equalTo:@"thai-square-restaurant-cupertino"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         for (PFObject *food in objects) {
             NSLog(@"%@", food);

@@ -23,7 +23,8 @@ float const MILES_PER_METER = 0.000621371;
             [categoryNames addObject:obj[0]];
         }];
         self.categories = [categoryNames componentsJoinedByString:@", "];
-        
+
+        self.id = dictionary[@"id"];
         self.name = dictionary[@"name"];
         self.imageUrl = [dictionary[@"image_url"] stringByReplacingOccurrencesOfString:@"ms.jpg" withString:@"l.jpg"];
         NSArray *address = [dictionary valueForKeyPath:@"location.address"];
