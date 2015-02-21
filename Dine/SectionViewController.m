@@ -9,6 +9,7 @@
 #import "SectionViewController.h"
 #import "YelpClient.h"
 #import "RestaurantView.h"
+#import "Parse/Parse.h"
 
 NSString * const K_YELP_CCONSUMER_KEY = @"vxKwwcR_NMQ7WaEiQBK_CA";
 NSString * const K_YELP_CONSUMER_SECRET = @"33QCvh5bIF5jIHR5klQr7RtBDhQ";
@@ -123,6 +124,22 @@ float const METERS_PER_MILE = 1609.344;
 - (void)tapOnRestaurant:(Restaurant *)restaurant {
     // TODO: display restaurant detail page
     NSLog(@"you've tapped on a restaurant!!");
+    
+    // Sample code to get restaurant object
+    /*
+    PFQuery *query = [PFQuery queryWithClassName:@"Restaurant"];
+    [query getObjectInBackgroundWithId:@"eS2FBIaZ4s" block:^(PFObject *pfRrestaurant, NSError *error) {
+        NSLog(@"%@", pfRrestaurant);
+    }];
+     */
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Food"];
+    [query whereKey:@"parent" equalTo:[PFObject objectWithoutDataWithClassName:@"Restaurant" objectId:@"eS2FBIaZ4s"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        for (PFObject *food in objects) {
+            NSLog(@"%@", food);
+        }
+    }];
 }
 
 #pragma mark - private methods

@@ -38,6 +38,9 @@
 		A50CD9031A9436BB00B54270 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50CD8F61A9436BB00B54270 /* StoreKit.framework */; };
 		A50CD9041A9436BB00B54270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50CD8F71A9436BB00B54270 /* SystemConfiguration.framework */; };
 		A50CD9061A94397B00B54270 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50CD9051A94397B00B54270 /* ParseFacebookUtils.framework */; };
+		A51FEF211A985D7E000430DB /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51FEF201A985D7E000430DB /* ParseCrashReporting.framework */; };
+		A51FEF251A985FBA000430DB /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A51FEF241A985FBA000430DB /* libstdc++.6.dylib */; };
+		A581327A1A9867190022F789 /* octopus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A58132791A9867190022F789 /* octopus.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		A50CD8F61A9436BB00B54270 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A50CD8F71A9436BB00B54270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A50CD9051A94397B00B54270 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		A51FEF201A985D7E000430DB /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		A51FEF241A985FBA000430DB /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		A58132791A9867190022F789 /* octopus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = octopus.jpg; path = ../../../Downloads/octopus.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +109,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51FEF251A985FBA000430DB /* libstdc++.6.dylib in Frameworks */,
 				A50CD8F81A9436BB00B54270 /* Accounts.framework in Frameworks */,
 				A50CD8F91A9436BB00B54270 /* AudioToolbox.framework in Frameworks */,
 				A50CD8FA1A9436BB00B54270 /* CFNetwork.framework in Frameworks */,
+				A51FEF211A985D7E000430DB /* ParseCrashReporting.framework in Frameworks */,
 				A50CD8FB1A9436BB00B54270 /* CoreGraphics.framework in Frameworks */,
 				A50CD8FC1A9436BB00B54270 /* CoreLocation.framework in Frameworks */,
 				A50CD8FD1A9436BB00B54270 /* libsqlite3.dylib in Frameworks */,
@@ -241,6 +249,7 @@
 		67D65D241A93A5F500023008 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A58132791A9867190022F789 /* octopus.jpg */,
 				67F361A61A947368004A7C96 /* tea.gif */,
 			);
 			name = Resources;
@@ -249,6 +258,8 @@
 		AF13AA8C600B001B66F59E25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A51FEF241A985FBA000430DB /* libstdc++.6.dylib */,
+				A51FEF201A985D7E000430DB /* ParseCrashReporting.framework */,
 				67F3619F1A9463C5004A7C96 /* MediaPlayer.framework */,
 				A50CD9051A94397B00B54270 /* ParseFacebookUtils.framework */,
 				A50CD8EB1A9436BB00B54270 /* Accounts.framework */,
@@ -361,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A581327A1A9867190022F789 /* octopus.jpg in Resources */,
 				677A8F611A8DC68E006F07F3 /* TipViewController.xib in Resources */,
 				67D65D231A93A37E00023008 /* MainViewController.xib in Resources */,
 				67F361A71A947368004A7C96 /* tea.gif in Resources */,

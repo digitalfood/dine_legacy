@@ -9,11 +9,12 @@
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
 #import <ParseUI/ParseUI.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "MainViewController.h"
 
-NSString *kApplicationId = @"fBRzEFzV9FSrQlnUpokfbdEl4a8T6zpCMtCl5UFw";
-NSString *kClientKey = @"jgjb5IDkcNrDJQTeQ97KyQZ3s49frMry5unqwUuu";
+NSString *kApplicationId = @"3Ssnj0MqibVZKYWW8YhycgeEt1u9PYcJtu3GN1YL";
+NSString *kClientKey = @"iJbIfAr9JJ8Td5JOkZw8zTTlh9UlF7cwHdxt0x5g";
 
 @interface AppDelegate () <PFLogInViewControllerDelegate>
 
@@ -27,6 +28,7 @@ NSString *kClientKey = @"jgjb5IDkcNrDJQTeQ97KyQZ3s49frMry5unqwUuu";
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     // Initiate Parse
+    [ParseCrashReporting enable];
     [Parse setApplicationId:kApplicationId clientKey:kClientKey];
     [PFAnalytics trackAppOpenedWithLaunchOptions:nil];
     [PFFacebookUtils initializeFacebook];
