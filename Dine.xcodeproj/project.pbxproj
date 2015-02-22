@@ -7,23 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		670C27CD1A9904CF00402194 /* RestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 670C27CB1A9904CF00402194 /* RestaurantDetailViewController.m */; };
 		670C27CE1A9904CF00402194 /* RestaurantDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670C27CC1A9904CF00402194 /* RestaurantDetailViewController.xib */; };
-		67162F571A959568000AB044 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67162F551A959568000AB044 /* SectionViewController.m */; };
 		67162F581A959568000AB044 /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67162F561A959568000AB044 /* SectionViewController.xib */; };
-		67162F5B1A9597E1000AB044 /* RestaurantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67162F5A1A9597E1000AB044 /* RestaurantView.m */; };
-		595F270B1A98FC9000E5FAF5 /* DishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595F270A1A98FC9000E5FAF5 /* DishView.xib */; };
-		595F270E1A98FFDE00E5FAF5 /* DishView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595F270D1A98FFDE00E5FAF5 /* DishView.m */; };
-		677A8EEE1A8D9942006F07F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8EED1A8D9942006F07F3 /* main.m */; };
-		677A8EF11A8D9942006F07F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8EF01A8D9942006F07F3 /* AppDelegate.m */; };
 		677A8EF91A8D9942006F07F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 677A8EF81A8D9942006F07F3 /* Images.xcassets */; };
 		677A8EFC1A8D9942006F07F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677A8EFA1A8D9942006F07F3 /* LaunchScreen.xib */; };
 		677A8F081A8D9942006F07F3 /* DineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8F071A8D9942006F07F3 /* DineTests.m */; };
-		677A8F601A8DC68E006F07F3 /* TipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8F5E1A8DC68E006F07F3 /* TipViewController.m */; };
 		677A8F611A8DC68E006F07F3 /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 677A8F5F1A8DC68E006F07F3 /* TipViewController.xib */; };
-		67A7C7241A931FD1007AF85C /* YelpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 67A7C7231A931FD1007AF85C /* YelpClient.m */; };
-		67A7C7281A931FF1007AF85C /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 67A7C7271A931FF1007AF85C /* Restaurant.m */; };
-		67D65D221A93A37E00023008 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D65D201A93A37E00023008 /* MainViewController.m */; };
 		67D65D231A93A37E00023008 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D65D211A93A37E00023008 /* MainViewController.xib */; };
 		67F361A71A947368004A7C96 /* tea.gif in Resources */ = {isa = PBXBuildFile; fileRef = 67F361A61A947368004A7C96 /* tea.gif */; };
 		A0782AC08CA20F8B932BB89D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1F897668A9519BC42842DB /* libPods.a */; };
@@ -44,6 +33,7 @@
 		A50CD9061A94397B00B54270 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50CD9051A94397B00B54270 /* ParseFacebookUtils.framework */; };
 		A51FEF211A985D7E000430DB /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51FEF201A985D7E000430DB /* ParseCrashReporting.framework */; };
 		A51FEF251A985FBA000430DB /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A51FEF241A985FBA000430DB /* libstdc++.6.dylib */; };
+		A55C29B11A995BA4002CAB2B /* DishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55C29AE1A995BA4002CAB2B /* DishView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,11 +55,6 @@
 		67162F541A959568000AB044 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
 		67162F551A959568000AB044 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		67162F561A959568000AB044 /* SectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionViewController.xib; sourceTree = "<group>"; };
-		67162F591A9597E1000AB044 /* RestaurantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantView.h; sourceTree = "<group>"; };
-		67162F5A1A9597E1000AB044 /* RestaurantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantView.m; sourceTree = "<group>"; };
-		595F270A1A98FC9000E5FAF5 /* DishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DishView.xib; sourceTree = "<group>"; };
-		595F270C1A98FFDE00E5FAF5 /* DishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishView.h; sourceTree = "<group>"; };
-		595F270D1A98FFDE00E5FAF5 /* DishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishView.m; sourceTree = "<group>"; };
 		677A8EE81A8D9942006F07F3 /* Dine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677A8EEC1A8D9942006F07F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677A8EED1A8D9942006F07F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -110,6 +95,11 @@
 		A50CD9051A94397B00B54270 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		A51FEF201A985D7E000430DB /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		A51FEF241A985FBA000430DB /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		A55C29AC1A995BA4002CAB2B /* DishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishView.h; sourceTree = "<group>"; };
+		A55C29AD1A995BA4002CAB2B /* DishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishView.m; sourceTree = "<group>"; };
+		A55C29AE1A995BA4002CAB2B /* DishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DishView.xib; sourceTree = "<group>"; };
+		A55C29AF1A995BA4002CAB2B /* RestaurantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantView.h; sourceTree = "<group>"; };
+		A55C29B01A995BA4002CAB2B /* RestaurantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +163,7 @@
 			children = (
 				67A7C7211A931FB5007AF85C /* API */,
 				67A7C7251A931FDB007AF85C /* Models */,
-				67A7C7291A93200E007AF85C /* Views */,
+				A55C29AB1A995B70002CAB2B /* View */,
 				677A8F571A8DC659006F07F3 /* ViewController */,
 				67D65D241A93A5F500023008 /* Resources */,
 				677A8EEF1A8D9942006F07F3 /* AppDelegate.h */,
@@ -248,30 +238,24 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		67A7C7291A93200E007AF85C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				67162F591A9597E1000AB044 /* RestaurantView.h */,
-				67162F5A1A9597E1000AB044 /* RestaurantView.m */,
-				67D65D251A93A72C00023008 /* SideMenuCell.h */,
-				67D65D261A93A72C00023008 /* SideMenuCell.m */,
-				67D65D271A93A72C00023008 /* SideMenuCell.xib */,
-				67A7C72A1A932022007AF85C /* RestaurantCell.h */,
-				67A7C72B1A932022007AF85C /* RestaurantCell.m */,
-				67A7C72C1A932022007AF85C /* RestaurantCell.xib */,
-				595F270C1A98FFDE00E5FAF5 /* DishView.h */,
-				595F270D1A98FFDE00E5FAF5 /* DishView.m */,
-				595F270A1A98FC9000E5FAF5 /* DishView.xib */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		67D65D241A93A5F500023008 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				67F361A61A947368004A7C96 /* tea.gif */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		A55C29AB1A995B70002CAB2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A55C29AC1A995BA4002CAB2B /* DishView.h */,
+				A55C29AD1A995BA4002CAB2B /* DishView.m */,
+				A55C29AE1A995BA4002CAB2B /* DishView.xib */,
+				A55C29AF1A995BA4002CAB2B /* RestaurantView.h */,
+				A55C29B01A995BA4002CAB2B /* RestaurantView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		AF13AA8C600B001B66F59E25 /* Frameworks */ = {
@@ -317,7 +301,6 @@
 			buildConfigurationList = 677A8F0B1A8D9942006F07F3 /* Build configuration list for PBXNativeTarget "Dine" */;
 			buildPhases = (
 				938727A47B4C3CB624CCD042 /* Check Pods Manifest.lock */,
-				677A8EE41A8D9942006F07F3 /* Sources */,
 				677A8EE51A8D9942006F07F3 /* Frameworks */,
 				677A8EE61A8D9942006F07F3 /* Resources */,
 				CCC97CF7A3B0F5075DC9F854 /* Copy Pods Resources */,
@@ -394,7 +377,7 @@
 			files = (
 				677A8F611A8DC68E006F07F3 /* TipViewController.xib in Resources */,
 				67D65D231A93A37E00023008 /* MainViewController.xib in Resources */,
-				595F270B1A98FC9000E5FAF5 /* DishView.xib in Resources */,
+				A55C29B11A995BA4002CAB2B /* DishView.xib in Resources */,
 				67F361A71A947368004A7C96 /* tea.gif in Resources */,
 				670C27CE1A9904CF00402194 /* RestaurantDetailViewController.xib in Resources */,
 				677A8EFC1A8D9942006F07F3 /* LaunchScreen.xib in Resources */,
@@ -446,25 +429,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		677A8EE41A8D9942006F07F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				67162F5B1A9597E1000AB044 /* RestaurantView.m in Sources */,
-				670C27CD1A9904CF00402194 /* RestaurantDetailViewController.m in Sources */,
-				67A7C7281A931FF1007AF85C /* Restaurant.m in Sources */,
-				67A7C7241A931FD1007AF85C /* YelpClient.m in Sources */,
-				677A8EF11A8D9942006F07F3 /* AppDelegate.m in Sources */,
-				67D65D221A93A37E00023008 /* MainViewController.m in Sources */,
-				67162F571A959568000AB044 /* SectionViewController.m in Sources */,
-				677A8F601A8DC68E006F07F3 /* TipViewController.m in Sources */,
-				67D65D281A93A72C00023008 /* SideMenuCell.m in Sources */,
-				595F270E1A98FFDE00E5FAF5 /* DishView.m in Sources */,
-				67A7C7321A932372007AF85C /* RestaurantsViewController.m in Sources */,
-				677A8EEE1A8D9942006F07F3 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		677A8EFD1A8D9942006F07F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
