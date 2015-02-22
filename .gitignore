@@ -19,6 +19,3 @@ DerivedData
 *.ipa
 .DS_Store
 Podfile.lock
-Parse.framework
-ParseCrashReporting.framework
-ParseFacebookUtils.framework
