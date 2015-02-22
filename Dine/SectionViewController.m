@@ -125,6 +125,8 @@ float const METERS_PER_MILE = 1609.344;
 
 - (void)tapOnRestaurant:(Restaurant *)restaurant {
     [self.delegate tapOnRestaurant:restaurant];
+    // TODO: display restaurant detail page
+    NSLog(@"you've tapped on a restaurant!!");
 }
 
 #pragma mark - private methods

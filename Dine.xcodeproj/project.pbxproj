@@ -12,6 +12,8 @@
 		67162F571A959568000AB044 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67162F551A959568000AB044 /* SectionViewController.m */; };
 		67162F581A959568000AB044 /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67162F561A959568000AB044 /* SectionViewController.xib */; };
 		67162F5B1A9597E1000AB044 /* RestaurantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67162F5A1A9597E1000AB044 /* RestaurantView.m */; };
+		595F270B1A98FC9000E5FAF5 /* DishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595F270A1A98FC9000E5FAF5 /* DishView.xib */; };
+		595F270E1A98FFDE00E5FAF5 /* DishView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595F270D1A98FFDE00E5FAF5 /* DishView.m */; };
 		677A8EEE1A8D9942006F07F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8EED1A8D9942006F07F3 /* main.m */; };
 		677A8EF11A8D9942006F07F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A8EF01A8D9942006F07F3 /* AppDelegate.m */; };
 		677A8EF91A8D9942006F07F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 677A8EF81A8D9942006F07F3 /* Images.xcassets */; };
@@ -65,6 +67,9 @@
 		67162F561A959568000AB044 /* SectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionViewController.xib; sourceTree = "<group>"; };
 		67162F591A9597E1000AB044 /* RestaurantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantView.h; sourceTree = "<group>"; };
 		67162F5A1A9597E1000AB044 /* RestaurantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantView.m; sourceTree = "<group>"; };
+		595F270A1A98FC9000E5FAF5 /* DishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DishView.xib; sourceTree = "<group>"; };
+		595F270C1A98FFDE00E5FAF5 /* DishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishView.h; sourceTree = "<group>"; };
+		595F270D1A98FFDE00E5FAF5 /* DishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishView.m; sourceTree = "<group>"; };
 		677A8EE81A8D9942006F07F3 /* Dine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677A8EEC1A8D9942006F07F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677A8EED1A8D9942006F07F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -248,6 +253,15 @@
 			children = (
 				67162F591A9597E1000AB044 /* RestaurantView.h */,
 				67162F5A1A9597E1000AB044 /* RestaurantView.m */,
+				67D65D251A93A72C00023008 /* SideMenuCell.h */,
+				67D65D261A93A72C00023008 /* SideMenuCell.m */,
+				67D65D271A93A72C00023008 /* SideMenuCell.xib */,
+				67A7C72A1A932022007AF85C /* RestaurantCell.h */,
+				67A7C72B1A932022007AF85C /* RestaurantCell.m */,
+				67A7C72C1A932022007AF85C /* RestaurantCell.xib */,
+				595F270C1A98FFDE00E5FAF5 /* DishView.h */,
+				595F270D1A98FFDE00E5FAF5 /* DishView.m */,
+				595F270A1A98FC9000E5FAF5 /* DishView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -380,6 +394,7 @@
 			files = (
 				677A8F611A8DC68E006F07F3 /* TipViewController.xib in Resources */,
 				67D65D231A93A37E00023008 /* MainViewController.xib in Resources */,
+				595F270B1A98FC9000E5FAF5 /* DishView.xib in Resources */,
 				67F361A71A947368004A7C96 /* tea.gif in Resources */,
 				670C27CE1A9904CF00402194 /* RestaurantDetailViewController.xib in Resources */,
 				677A8EFC1A8D9942006F07F3 /* LaunchScreen.xib in Resources */,
@@ -443,6 +458,9 @@
 				67D65D221A93A37E00023008 /* MainViewController.m in Sources */,
 				67162F571A959568000AB044 /* SectionViewController.m in Sources */,
 				677A8F601A8DC68E006F07F3 /* TipViewController.m in Sources */,
+				67D65D281A93A72C00023008 /* SideMenuCell.m in Sources */,
+				595F270E1A98FFDE00E5FAF5 /* DishView.m in Sources */,
+				67A7C7321A932372007AF85C /* RestaurantsViewController.m in Sources */,
 				677A8EEE1A8D9942006F07F3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,18 +8,27 @@
 
 #import "MainViewController.h"
 #import "SectionViewController.h"
+#import "DishView.h"
 #import "RestaurantDetailViewController.h"
 #import "Parse/Parse.h"
 
 float const ANIMATION_DURATION = 0.5;
 
-@interface MainViewController () <SectionViewControllerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+@interface MainViewController () <UIScrollViewDelegate, SectionViewControllerDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+
 @property (weak, nonatomic) IBOutlet UIView *sectionView;
 @property (weak, nonatomic) IBOutlet UIView *listView;
 
 @property (nonatomic, strong) SectionViewController *svc;
 @property (nonatomic, assign) BOOL isPresenting;
 @property (nonatomic, assign) int animationType;
+
+//dish
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSLayoutConstraint *constraintHeight;
+@property (nonatomic, strong) NSMutableArray *contrainstArray;
+@property (nonatomic, assign) BOOL pageOpened;
+@property (nonatomic, assign) CGRect originalScrollViewFrame;
 
 @end
 
@@ -37,6 +46,10 @@ typedef enum {
     self.svc.delegate = self;
     self.svc.view.frame = self.sectionView.frame;
     [self.sectionView addSubview:self.svc.view];
+    
+    [self configureScrollView];
+    [self adjustDishes];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -182,5 +195,234 @@ typedef enum {
         }];
     }
 }
+
+//dishes
+
+- (void)configureScrollView
+{
+    _contrainstArray = [[NSMutableArray alloc] init];
+    
+    _scrollView = [UIScrollView new];
+    [_scrollView setDelegate:self];
+    _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:_scrollView];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_scrollView
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_scrollView
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_scrollView
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_scrollView
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_scrollView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0]];
+    
+    _constraintHeight = [NSLayoutConstraint constraintWithItem:_scrollView
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:253];
+    
+    [self.view addConstraint:_constraintHeight];
+    self.originalScrollViewFrame = _scrollView.frame;
+    
+}
+
+
+- (void)adjustDishes
+{
+    DishView *previousDish = nil;
+    
+    for (NSInteger i = 0; i < 10; i++) {
+        CGRect dishFrame = self.view.frame;
+        dishFrame.size.width = 143;
+        dishFrame.size.height = 253;
+        
+        DishView *dish = [[DishView alloc] initWithFrame:dishFrame];
+        [dish setTag:i];
+        
+        dish.dishName.text = [NSString stringWithFormat:@"%d", i];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+        [dish addGestureRecognizer:tapGestureRecognizer];
+        
+        dish.translatesAutoresizingMaskIntoConstraints = NO;
+        [_scrollView addSubview:dish];
+        
+        // Default constraints
+        
+        [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:dish
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_scrollView
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.0
+                                                                 constant:0]];
+        
+        [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:dish
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_scrollView
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:0]];
+        
+        NSLayoutConstraint *storyWidthConstraint = [NSLayoutConstraint constraintWithItem:dish
+                                                                                attribute:NSLayoutAttributeWidth
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:nil
+                                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                                               multiplier:1.0
+                                                                                 constant:143];
+        
+        [_scrollView addConstraint:storyWidthConstraint];
+        [_contrainstArray addObject:storyWidthConstraint];
+        
+        [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:dish
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_scrollView
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:1.0
+                                                                 constant:0]];
+        
+        if (!previousDish) {
+            
+            [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:dish
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:_scrollView
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                   multiplier:1.0
+                                                                     constant:0]];
+            
+        } else {
+            
+            [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:dish
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:previousDish
+                                                                    attribute:NSLayoutAttributeRight
+                                                                   multiplier:1.0
+                                                                     constant:0]];
+            
+        }
+        previousDish = dish;
+    }
+    
+    [_scrollView addConstraint:[NSLayoutConstraint constraintWithItem:previousDish
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_scrollView
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1.0
+                                                             constant:0]];
+}
+
+
+- (void)handleTapFrom:(UITapGestureRecognizer *)sender
+{
+    NSInteger element = sender.view.tag;
+    NSLog(@"selected element: %ld", (long)element);
+    CGRect frame = _originalScrollViewFrame;
+    frame.origin.x = _pageOpened ? 143 * element : self.view.frame.size.width * element;
+    //[_scrollView scrollRectToVisible:frame animated:YES];
+    [_scrollView setContentOffset:CGPointMake(frame.origin.x, 0) animated:YES];
+    
+    if (!_pageOpened) {
+        
+        [self.view removeConstraint:_constraintHeight];
+        _constraintHeight = [NSLayoutConstraint constraintWithItem:_scrollView
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.view
+                                                         attribute:NSLayoutAttributeHeight
+                                                        multiplier:1.0
+                                                          constant:0];
+        [self.view addConstraint:_constraintHeight];
+        [self increaseStoriesSize];
+        
+    
+    } else {
+        
+        [self.view removeConstraint:_constraintHeight];
+        _constraintHeight = [NSLayoutConstraint constraintWithItem:_scrollView
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:nil
+                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                        multiplier:1.0
+                                                          constant:253];
+        [self.view addConstraint:_constraintHeight];
+        [self decreaseStoriesSize];
+        
+    }
+    
+    
+    [_scrollView setPagingEnabled:!_pageOpened];
+    
+    [self.view setNeedsUpdateConstraints];
+    [_scrollView setNeedsUpdateConstraints];
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        
+        [self.view layoutIfNeeded];
+        [_scrollView layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        _pageOpened = !_pageOpened;
+    }];
+    
+     
+}
+
+
+- (void)increaseStoriesSize
+{
+    for (NSLayoutConstraint *constraint in _contrainstArray) {
+        [constraint setConstant:self.view.frame.size.width];
+    }
+}
+
+
+- (void)decreaseStoriesSize
+{
+    for (NSLayoutConstraint *constraint in _contrainstArray) {
+        [constraint setConstant:143];
+    }
+}
+
 
 @end

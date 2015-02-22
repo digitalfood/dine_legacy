@@ -18,3 +18,4 @@ DerivedData
 *.hmap
 *.ipa
 .DS_Store
+Podfile.lock
